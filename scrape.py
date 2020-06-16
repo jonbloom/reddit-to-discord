@@ -13,6 +13,7 @@ REDDIT_SECRET = os.getenv("REDDIT_SECRET")
 REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
 REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
 REDDIT_USER_AGENT = os.getenv("REDDIT_USER_AGENT")
+REDDIT_SUBREDDIT = os.getenv("REDDIT_SUBREDDIT")
 DISCORD_WEBHOOK = os.getenv("DISCORD_WEBHOOK")
 DATABASE_PATH = os.getenv("DATABASE_PATH")
 
@@ -35,7 +36,7 @@ reddit = praw.Reddit(client_id=REDDIT_ID,
 
 
 def scrape():
-    for submission in reversed(list(reddit.subreddit("grandrapids").new(limit=10))):
+    for submission in reversed(list(reddit.subreddit(REDDIT_SUBREDDIT).new(limit=10))):
 
         try:
             already_found = Post.get(post_id=submission.id)
